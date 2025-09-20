@@ -1,8 +1,6 @@
 import axios from "axios";
 
-const API_BASE_URL =
-  process.env.REACT_APP_API_URL ||
-  "https://fleettrack-backend-1.onrender.com/api/v1.1";
+const API_BASE_URL = "https://fleettrack-backend-1.onrender.com/api/v1.1";
 
 export const apiClient = axios.create({
   baseURL: API_BASE_URL,
