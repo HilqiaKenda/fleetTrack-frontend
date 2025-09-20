@@ -360,14 +360,14 @@ export default function Home() {
                   <GithubIcon className="w-6 h-6" />
                 </Link>
                 <Link
-                  href="https://twitter.com"
+                  href="https://x.com/HKenda13868"
                   isExternal
                   className="text-gray-400 hover:text-primary transition-colors"
                 >
                   <TwitterIcon className="w-6 h-6" />
                 </Link>
                 <Link
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/in/hilqia-kenda"
                   isExternal
                   className="text-gray-400 hover:text-primary transition-colors"
                 >
@@ -425,7 +425,6 @@ export default function Home() {
               </ul>
             </div>
 
-            {/* Company Links */}
             <div>
               <h4 className="text-lg font-semibold mb-6">Company</h4>
               <ul className="space-y-3">
@@ -468,7 +467,6 @@ export default function Home() {
               </ul>
             </div>
 
-            {/* Support Links */}
             <div>
               <h4 className="text-lg font-semibold mb-6">Support</h4>
               <ul className="space-y-3">
@@ -514,7 +512,6 @@ export default function Home() {
 
           <Divider className="mb-8" />
 
-          {/* Copyright */}
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm">
               © 2024 FleetTracker. All rights reserved.

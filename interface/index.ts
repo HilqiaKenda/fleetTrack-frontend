@@ -10,10 +10,10 @@ export interface Location {
   address: string;
   latitude: number;
   longitude: number;
-  city?: string;
-  state?: string;
-  country?: string;
-  postal_code?: string;
+  city: string;
+  state: string;
+  country: string;
+  postal_code: string;
   created_at: string;
   updated_at: string;
 }

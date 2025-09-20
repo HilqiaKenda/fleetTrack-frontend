@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { Card, CardBody, CardHeader, Chip } from "@nextui-org/react";
 import { useTheme } from "next-themes";
@@ -121,7 +122,6 @@ export const EventsTimeline: React.FC<EventsTimelineProps> = ({ events }) => {
                   : "bg-content2 border-l-primary/30 hover:bg-gray-50"
               }`}
             >
-              {/* Timeline connector */}
               {index < sortedEvents.length - 1 && (
                 <div
                   className={`absolute left-8 top-14 w-0.5 h-12 ${
@@ -130,7 +130,6 @@ export const EventsTimeline: React.FC<EventsTimelineProps> = ({ events }) => {
                 />
               )}
 
-              {/* Event number and icon */}
               <div className="flex flex-col items-center space-y-2 flex-shrink-0">
                 <Chip
                   size="sm"
@@ -149,7 +148,6 @@ export const EventsTimeline: React.FC<EventsTimelineProps> = ({ events }) => {
                 </div>
               </div>
 
-              {/* Event details */}
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
@@ -201,7 +199,6 @@ export const EventsTimeline: React.FC<EventsTimelineProps> = ({ events }) => {
                     )}
                   </div>
 
-                  {/* Event metrics */}
                   <div className="text-right ml-4 space-y-1">
                     <div
                       className={`px-2 py-1 rounded text-sm font-medium ${

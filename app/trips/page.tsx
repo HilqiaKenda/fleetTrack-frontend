@@ -1,4 +1,5 @@
 "use client";
+
 import { useTrips, useTripStatistics } from "@/hooks/useTrips";
 import { useMemo, useState } from "react";
 import { format } from "date-fns";

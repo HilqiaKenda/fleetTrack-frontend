@@ -55,7 +55,6 @@ export const LocationSearchInput: React.FC<LocationSearchInputProps> = ({
   const { data: searchResults = [] } = useLocationSearch(searchQuery);
   const createLocationMutation = useCreateLocation();
 
-  // Form for new location
   const locationForm = useForm<LocationFormData>({
     resolver: zodResolver(locationSchema),
     defaultValues: {
@@ -63,7 +62,6 @@ export const LocationSearchInput: React.FC<LocationSearchInputProps> = ({
     },
   });
 
-  // Combined location options
   const allLocations = useMemo(() => {
     const combined = [...locations];
     searchResults.forEach((result) => {
@@ -71,15 +69,15 @@ export const LocationSearchInput: React.FC<LocationSearchInputProps> = ({
         combined.push(result);
       }
     });
-    return combined.sort((a, b) => a.address.localeCompare(b.address));
+    return combined.sort((start, end) =>
+      start.address.localeCompare(end.address)
+    );
   }, [locations, searchResults]);
 
-  // Format location display name
   const formatLocationName = (location: any) => {
     return `${location.address}${location.city ? `, ${location.city}` : ""}${location.state ? `, ${location.state}` : ""}`;
   };
 
-  // Handle new location creation
   const handleCreateLocation = async (data: LocationFormData) => {
     try {
       const newLocation = await createLocationMutation.mutateAsync(data);
@@ -93,11 +91,6 @@ export const LocationSearchInput: React.FC<LocationSearchInputProps> = ({
     }
   };
 
-  // Get selected location for display
-  const selectedLocation = value
-    ? allLocations.find((loc) => loc.id === value)
-    : undefined;
-
   return (
     <>
       <div className="flex gap-2">
@@ -106,7 +99,7 @@ export const LocationSearchInput: React.FC<LocationSearchInputProps> = ({
             label={isRequired ? `${label} *` : label}
             placeholder={placeholder}
             selectedKey={value?.toString()}
-            onSelectionChange={(key) =>
+            onSelectionChange={(key: any) =>
               onSelectionChange(key ? Number(key) : undefined)
             }
             inputValue={searchQuery}
@@ -136,7 +129,7 @@ export const LocationSearchInput: React.FC<LocationSearchInputProps> = ({
       {/* New Location Modal */}
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="2xl">
         <ModalContent>
-          {(onClose) => (
+          {(onClose: any) => (
             <form onSubmit={locationForm.handleSubmit(handleCreateLocation)}>
               <ModalHeader className="flex flex-col gap-1">
                 Add New Location

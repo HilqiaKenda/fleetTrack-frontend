@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,14 +18,10 @@ import {
 } from "@nextui-org/react";
 import { toast } from "sonner";
 import { PlusIcon, TrashIcon, ClockIcon } from "lucide-react";
-
-// Import hooks
 import { useDrivers } from "@/hooks/useDrivers";
 import { useVehicles } from "@/hooks/useVehicles";
 import { useActiveTrips, useCreateTrip } from "@/hooks/useTrips";
 import { useLocations } from "@/hooks/useLocations";
-
-// Import components and types
 import { SmartLocationInput } from "@/components/location/SmartLocationInput";
 import { LocationForm } from "@/components/location/LocationForm";
 import {
@@ -39,17 +36,15 @@ export default function LogPage() {
   const [selectedTrip, setSelectedTrip] = useState<number | null>(null);
   const [showNewLocationForm, setShowNewLocationForm] = useState(false);
 
-  // Data hooks
   const { data: drivers = [] } = useDrivers();
   const { data: vehicles = [] } = useVehicles();
   const { data: activeTrips = [] } = useActiveTrips();
   const { data: locations = [] } = useLocations();
 
-  // Mutation hooks
   const createTripMutation = useCreateTrip();
 
-  // Form configuration
   const tripForm = useForm<TripFormData>({
+    // @ts-ignore
     resolver: zodResolver(tripSchema),
     defaultValues: {
       date: new Date().toISOString().split("T")[0],
@@ -60,6 +55,8 @@ export default function LogPage() {
             address: "",
             city: "",
             state: "",
+            latitude: 0,
+            longitude: 0,
             country: "USA",
             postal_code: "",
           },
@@ -73,20 +70,17 @@ export default function LogPage() {
     },
   });
 
-  // Field array for initial events
   const { fields, append, remove } = useFieldArray({
     control: tripForm.control,
     name: "initial_events",
   });
 
-  // Auto-select trip if only one active trip exists
   useEffect(() => {
     if (activeTrips.length === 1 && !selectedTrip) {
       setSelectedTrip(activeTrips[0].id);
     }
   }, [activeTrips, selectedTrip]);
 
-  // Handle trip creation
   const onTripSubmit = async (data: TripFormData) => {
     try {
       const newTrip = await createTripMutation.mutateAsync({
@@ -124,7 +118,6 @@ export default function LogPage() {
         ],
       });
 
-      // Auto-switch to event tab and select the new trip
       setActiveTab("event");
       setSelectedTrip(newTrip.id);
     } catch (error) {
@@ -151,6 +144,8 @@ export default function LogPage() {
         address: "",
         city: "",
         state: "",
+        latitude: 0,
+        longitude: 0,
         country: "USA",
         postal_code: "",
       },
@@ -204,6 +199,7 @@ export default function LogPage() {
             </CardHeader>
             <CardBody>
               <form
+                // @ts-ignore
                 onSubmit={tripForm.handleSubmit(onTripSubmit)}
                 className="space-y-8 p-6 bg-content1 dark:bg-content1 rounded-lg shadow-sm border border-default-200 dark:border-default-700"
               >

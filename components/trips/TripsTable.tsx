@@ -125,12 +125,6 @@ export const TripsTable: React.FC<TripsTableProps> = ({ trips, isLoading }) => {
                       )}
                     </span>
                   </div>
-                  {/* <div className="flex items-center space-x-1">
-                    <span className="w-2 h-2 bg-orange-500 rounded-full"></span>
-                    <span>
-                      On-duty: {TripDataFormatter.formatHours(onDutyHours)}
-                    </span>
-                  </div> */}
                   <div className="text-xs text-gray-500">
                     Total:{" "}
                     {TripDataFormatter.formatHours(

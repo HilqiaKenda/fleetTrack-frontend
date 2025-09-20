@@ -2,12 +2,12 @@ import { z } from "zod";
 
 export const locationDataSchema = z.object({
   address: z.string().min(1, "Address is required"),
-  latitude: z.number().optional(),
-  longitude: z.number().optional(),
-  city: z.string().optional(),
-  state: z.string().optional(),
-  country: z.string().default("USA"),
-  postal_code: z.string().optional(),
+  latitude: z.number(),
+  longitude: z.number(),
+  city: z.string(),
+  state: z.string(),
+  country: z.string(),
+  postal_code: z.string(),
 });
 
 export const initialEventSchema = z
@@ -28,7 +28,7 @@ export const initialEventSchema = z
         "other",
       ],
       {
-        errorMap: () => ({ message: "Please select a valid event type" }),
+        message: "Please select a valid event type",
       }
     ),
     timestamp: z.string().min(1, "Timestamp is required"),
@@ -60,9 +60,7 @@ export const tripSchema = z.object({
   co_driver: z.number().optional().nullable(),
   vehicle: z.number().min(1, "Vehicle is required"),
   date: z.string().min(1, "Date is required"),
-  cycle_rule: z.enum(["70hr/8day", "60hr/7day"], {
-    errorMap: () => ({ message: "Please select a valid cycle rule" }),
-  }),
+  cycle_rule: z.enum(["70hr/8day", "60hr/7day"] as const),
   shipper_and_commodity: z.string().optional(),
   remarks: z.string().optional(),
   origin_location: z.number().optional().nullable(),
@@ -90,7 +88,7 @@ export const eventSchema = z.object({
       "other",
     ],
     {
-      errorMap: () => ({ message: "Please select a valid event type" }),
+      message: "Please select a valid event type",
     }
   ),
   timestamp: z.string().min(1, "Timestamp is required"),
@@ -107,12 +105,12 @@ export const locationSchema = z.object({
     .string()
     .min(1, "Address is required")
     .max(255, "Address is too long"),
-  city: z.string().optional(),
-  state: z.string().optional(),
-  country: z.string().default("USA"),
-  postal_code: z.string().optional(),
-  latitude: z.number().optional(),
-  longitude: z.number().optional(),
+  city: z.string(),
+  state: z.string(),
+  country: z.string(),
+  postal_code: z.string(),
+  latitude: z.number(),
+  longitude: z.number(),
 });
 
 export const enhancedEventSchema = eventSchema
@@ -144,13 +142,6 @@ export const enhancedEventSchema = eventSchema
       path: ["timestamp"],
     }
   );
-
-export type LocationData = z.infer<typeof locationDataSchema>;
-export type InitialEventType = z.infer<typeof initialEventSchema>;
-export type TripFormData = z.infer<typeof tripSchema>;
-export type EventFormData = z.infer<typeof eventSchema>;
-export type LocationFormData = z.infer<typeof locationSchema>;
-export type EnhancedEventFormData = z.infer<typeof enhancedEventSchema>;
 
 export const EVENT_TYPE_OPTIONS = [
   {
@@ -262,3 +253,10 @@ export const formatEventTypeName = (eventType: string): string => {
   const option = EVENT_TYPE_OPTIONS.find((opt) => opt.value === eventType);
   return option ? option.label : eventType.replace(/_/g, " ");
 };
+
+export type LocationData = z.infer<typeof locationDataSchema>;
+export type InitialEventType = z.infer<typeof initialEventSchema>;
+export type TripFormData = z.infer<typeof tripSchema>;
+export type EventFormData = z.infer<typeof eventSchema>;
+export type LocationFormData = z.infer<typeof locationSchema>;
+export type EnhancedEventFormData = z.infer<typeof enhancedEventSchema>;

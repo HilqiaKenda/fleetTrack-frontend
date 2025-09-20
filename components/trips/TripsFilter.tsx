@@ -1,15 +1,10 @@
 "use client";
 import React from "react";
-import {
-  Card,
-  CardBody,
-  Input,
-  Select,
-  SelectItem,
-  Button,
-} from "@nextui-org/react";
+import { Input, Select, SelectItem } from "@nextui-org/react";
 import { SearchIcon } from "@/components/icons";
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
+import { Card, CardBody } from "@heroui/card";
+import { Button } from "@heroui/button";
 
 interface TripsFilterProps {
   searchTerm: string;

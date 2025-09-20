@@ -6,7 +6,6 @@ export class JourneyCalculator {
   static getJourneyPositions(trip: Trip, events: TripEvent[]): MapPosition[] {
     const positions: MapPosition[] = [];
 
-    // Add origin
     if (trip.origin_location?.latitude && trip.origin_location?.longitude) {
       positions.push({
         lat: trip.origin_location.latitude,
@@ -17,7 +16,6 @@ export class JourneyCalculator {
       });
     }
 
-    // Sort events by timestamp and add positions
     const sortedEvents = [...events].sort(
       (a, b) =>
         new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
@@ -39,7 +37,6 @@ export class JourneyCalculator {
       }
     });
 
-    // Add destination if different from last position
     if (
       trip.destination_location?.latitude &&
       trip.destination_location?.longitude
@@ -98,7 +95,6 @@ export class JourneyCalculator {
       const current = positions[i];
       smoothRoute.push([current.lat, current.lng]);
 
-      // Add intermediate points between stops
       if (i < positions.length - 1) {
         const next = positions[i + 1];
         const distance = this.calculateDistance(
@@ -108,7 +104,6 @@ export class JourneyCalculator {
           next.lng
         );
 
-        // Add more intermediate points for longer distances
         const intermediateCount = Math.min(Math.floor(distance * 50), 6);
 
         for (let j = 1; j <= intermediateCount; j++) {
@@ -131,7 +126,7 @@ export class JourneyCalculator {
     lat2: number,
     lng2: number
   ): number {
-    const R = 6371; // Earth's radius in kilometers
+    const R = 6371;
     const dLat = ((lat2 - lat1) * Math.PI) / 180;
     const dLng = ((lng2 - lng1) * Math.PI) / 180;
     const a =
