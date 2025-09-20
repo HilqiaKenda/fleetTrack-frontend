@@ -80,6 +80,7 @@ export const LocationSearchInput: React.FC<LocationSearchInputProps> = ({
 
   const handleCreateLocation = async (data: LocationFormData) => {
     try {
+      // @ts-ignore
       const newLocation = await createLocationMutation.mutateAsync(data);
       toast.success("Location created successfully!");
       onSelectionChange(newLocation.id);

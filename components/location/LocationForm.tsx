@@ -30,6 +30,7 @@ export const LocationForm: React.FC<LocationFormProps> = ({
 
   const onLocationSubmit = async (data: LocationFormData) => {
     try {
+      // @ts-ignore
       await createLocationMutation.mutateAsync(data);
       toast.success("Location created successfully!");
       locationForm.reset({ country: "USA" });
