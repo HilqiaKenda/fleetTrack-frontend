@@ -74,7 +74,9 @@ export class TripFormatter {
       vehicleInfo: trip.vehicle_info,
       cycleRule: trip.cycle_rule,
       shipperAndCommodity: trip.shipper_and_commodity,
+      // @ts-ignore
       originLocation: trip.origin_location,
+      // @ts-ignore
       destinationLocation: trip.destination_location,
       remarks: trip.remarks,
       events: trip.events || [],

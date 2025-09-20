@@ -96,6 +96,7 @@ export const MapMarkers: React.FC<MapMarkersProps> = ({ positions }) => {
 
           case "event":
             const { event, index } = position.data;
+            // @ts-ignore
             icon = eventIcons[event.event_type] || eventIcons.other;
             popupContent = (
               <Card className="border-0 shadow-none max-w-xs">

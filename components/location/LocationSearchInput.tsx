@@ -1,18 +1,6 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import {
-  Autocomplete,
-  AutocompleteItem,
-  Button,
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Input,
-  useDisclosure,
-} from "@heroui/react";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PlusIcon, MapPinIcon } from "lucide-react";
@@ -27,6 +15,17 @@ import {
   useLocations,
   useLocationSearch,
 } from "@/hooks/useLocations";
+import { Autocomplete, AutocompleteItem } from "@nextui-org/autocomplete";
+import { Button } from "@heroui/button";
+import {
+  Input,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  useDisclosure,
+} from "@nextui-org/react";
 
 interface LocationSearchInputProps {
   value?: number;
@@ -48,6 +47,7 @@ export const LocationSearchInput: React.FC<LocationSearchInputProps> = ({
   isRequired = false,
 }) => {
   const [searchQuery, setSearchQuery] = useState("");
+
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   // Data hooks
@@ -127,7 +127,6 @@ export const LocationSearchInput: React.FC<LocationSearchInputProps> = ({
         </Button>
       </div>
 
-      {/* New Location Modal */}
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} size="2xl">
         <ModalContent>
           {(onClose: any) => (

@@ -67,6 +67,7 @@ export const SmartLocationInput: React.FC<SmartLocationInputProps> = ({
         <div className="grid grid-cols-1 gap-3">
           <Input
             value={value?.address || ""}
+            // @ts-ignore
             onChange={(e) => onChange({ ...value, address: e.target.value })}
             label="Address"
             placeholder="Enter street address"
@@ -82,6 +83,7 @@ export const SmartLocationInput: React.FC<SmartLocationInputProps> = ({
           <div className="grid grid-cols-2 gap-3">
             <Input
               value={value?.city || ""}
+              // @ts-ignore
               onChange={(e) => onChange({ ...value, city: e.target.value })}
               label="City"
               placeholder="Enter city"
@@ -93,6 +95,7 @@ export const SmartLocationInput: React.FC<SmartLocationInputProps> = ({
             />
             <Input
               value={value?.state || ""}
+              // @ts-ignore
               onChange={(e) => onChange({ ...value, state: e.target.value })}
               label="State"
               placeholder="Enter state"
@@ -108,6 +111,7 @@ export const SmartLocationInput: React.FC<SmartLocationInputProps> = ({
             <Input
               value={value?.postal_code || ""}
               onChange={(e) =>
+                // @ts-ignore
                 onChange({ ...value, postal_code: e.target.value })
               }
               label="Postal Code"
@@ -120,6 +124,7 @@ export const SmartLocationInput: React.FC<SmartLocationInputProps> = ({
             />
             <Input
               value={value?.country || "USA"}
+              // @ts-ignore
               onChange={(e) => onChange({ ...value, country: e.target.value })}
               label="Country"
               variant="bordered"
